@@ -18,7 +18,7 @@
             }
         },
         "AdminPassword": {
-            "type": "secureString",
+            "type": "securestring",
             "minLength": 0,
             "metadata": {
                 "description": "The MarkLogic administrator password"
@@ -112,7 +112,7 @@
             }
         },
         "SSHPublicKey": {
-            "type": "secureString",
+            "type": "securestring",
             "minLength": 0,
             "metadata": {
                 "description": "Public SSH key for virtual machine user specified"
