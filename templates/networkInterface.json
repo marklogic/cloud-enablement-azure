@@ -10,7 +10,7 @@
         "vnetId": "[resourceId('Microsoft.Network/virtualNetworks',parameters('networkInterfaceSetting').vnetName)]",
         "subnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('networkInterfaceSetting').vnetName, parameters('networkInterfaceSetting').subnetName)]",
         "lbBackendPoolIpv4Id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools',parameters('networkInterfaceSetting').lbName,parameters('networkInterfaceSetting').lbBackendPoolIpv4Name)]",
-        "lbBackendPoolIpv6Id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools',parameters('networkInterfaceSetting').lbName,parameters('networkInterfaceSetting').lbBackendPoolIpv6Name)]",
+        "lbBackendPoolIpv6Id": "[resourceId('Microsoft.Network/loadBalancers/backendAddressPools',parameters('networkInterfaceSetting').lbName,parameters('networkInterfaceSetting').lbBackendPoolIpv6Name)]"
     },
     "resources": [
         {
