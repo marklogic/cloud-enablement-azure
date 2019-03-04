@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "9.0-6.1",
+    "contentVersion": "9.0-8.2",
     "parameters": {
         "DeploymentName": {
             "type": "string",
@@ -140,7 +140,7 @@
                 "artifactsBaseUrl": ""
             },
             "minLength": 1,
-            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v9.0-6.1"
+            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v9.0-8.2"
         },
         "Location": {
             "type": "string",
@@ -151,7 +151,7 @@
         }
     },
     "variables": {
-        "templateVersion": "9.0-6.1",
+        "templateVersion": "9.0-8.2",
         "templateBaseUrl": "[concat(parameters('baseUrl'),'/templates/')]",
         "scriptBaseUrl": "[concat(parameters('baseUrl'),'/scripts/')]",
         "clusterPrefix": "[replace(parameters('DeploymentName'),' ','')]",
