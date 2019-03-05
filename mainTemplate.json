@@ -148,7 +148,7 @@
                 "artifactsBaseUrl": ""
             },
             "minLength": 1,
-            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v9.0-7"
+            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/9.0-7-develop"
         },
         "location": {
             "type": "string",
