@@ -11,6 +11,7 @@
   },
   "variables": {
     "appGatewayname": "[parameters('appGatewaySetting').name]",
+    "appGatewayProbeName": "health",
     "subnetId": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('appGatewaySetting').vnetName, parameters('appGatewaySetting').subnetName)]",
     "ports": [
       8000,
@@ -42,7 +43,10 @@
           "properties": {
             "Port": "[variables('ports')[copyIndex('backendHttpSettingsCollectionArray')]]",
             "Protocol": "Http",
-            "CookieBasedAffinity": "Enabled"
+            "CookieBasedAffinity": "Enabled",
+            "probe": {
+              "id": "[resourceId('Microsoft.Network/applicationGateways/probes',variables('appGatewayname'),variables('appGatewayProbeName'))]"
+            }
           }
         }
       },
@@ -142,7 +146,26 @@
         ],
         "backendHttpSettingsCollection": "[variables('backendHttpSettingsCollectionArray')]",
         "httpListeners": "[variables('httpListenersArray')]",
-        "requestRoutingRules": "[variables('requestRoutingRules')]"
+        "requestRoutingRules": "[variables('requestRoutingRules')]",
+        "probes": [
+          {
+            "name": "[variables('appGatewayProbeName')]",
+            "properties": {
+              "interval": 30,
+              "match": {
+                "statusCodes": [
+                  "200-401"
+                ]
+              },
+              "minServers": 0,
+              "path": "/",
+              "host": "marklogic.com",
+              "protocol": "Http",
+              "timeout": 30,
+              "unhealthyThreshold": 3
+            }
+          }
+        ]
       }
     }
   ]
