@@ -186,11 +186,22 @@
             "haExtXqyUrl": "[concat(variables('scriptBaseUrl'),'configure-ha.txt')]",
             "initScriptUrl": "[concat(variables('scriptBaseUrl'),'init.sh')]"
         },
+        "threeFaultDomainsRegions": [
+            "centralus",
+            "eastus",
+            "eastus2",
+            "westus",
+            "northcentralus",
+            "southcentralus",
+            "northeurope",
+            "westeurope",
+            "canadacentral"
+        ],
         "availabilitySetSetting": {
             "name": "[concat(variables('clusterPrefix'),'-availset')]",
             "location": "[variables('clusterLocation')]",
             "updateDomainCount": "20",
-            "faultDomainCount": "3",
+            "faultDomainCount": "[if(contains(variables('threeFaultDomainsRegions'),variables('clusterLocation')),'3','2')]",
             "apiVersion": "[variables('apiVersions').computeApiVersion]"
         },
         "vnetSetting": {
