@@ -133,7 +133,7 @@
                 "description": "Configure local-disk failover. Only applicable to multi-node cluster"
             }
         },
-        "baseUrl": {
+        "_artifactsLocation": {
             "type": "string",
             "metadata": {
                 "description": "The base URL for dependent assets",
@@ -152,8 +152,8 @@
     },
     "variables": {
         "templateVersion": "9.0-8.2",
-        "templateBaseUrl": "[concat(parameters('baseUrl'),'/templates/')]",
-        "scriptBaseUrl": "[concat(parameters('baseUrl'),'/scripts/')]",
+        "templateBaseUrl": "[concat(parameters('_artifactsLocation'),'/nestedtemplates/')]",
+        "scriptBaseUrl": "[concat(parameters('_artifactsLocation'),'/scripts/')]",
         "clusterPrefix": "[replace(parameters('DeploymentName'),' ','')]",
         "clusterLocation": "[parameters('Location')]",
         "enableAvailabilitySet": true,
@@ -162,7 +162,7 @@
         "imageOffer": "[if(equals(variables('license'),'DEV'),'marklogic-developer-9','marklogic-9-byol')]",
         "imageSku": "[if(equals(variables('license'),'DEV'),'ml9082_centos','ml9082_centos_byol')]",
         "apiVersions": {
-            "resourcesApiVersion": "2016-09-01",
+            "resourcesApiVersion": "2018-05-01",
             "networkApiVersion": "2017-08-01",
             "storageApiVersion": "2017-03-30",
             "computeApiVersion": "2017-03-30",
