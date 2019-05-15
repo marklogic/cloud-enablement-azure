@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "9.0-7",
+    "contentVersion": "9.0-8.2",
     "parameters": {
         "vnetSetting": {
             "type": "object"
@@ -26,7 +26,13 @@
                     {
                         "name": "[parameters('vnetSetting').vnetSubnetName]",
                         "properties": {
-                            "addressPrefix": "[parameters('vnetSetting').vnetSubnetPrefix]"
+                            "addressPrefix": "[parameters('vnetSetting').vnetVmSubnetPrefix]"
+                        }
+                    },
+                    {
+                        "name": "[parameters('vnetSetting').vnetAppGatewaySubnetName]",
+                        "properties": {
+                            "addressPrefix": "[parameters('vnetSetting').vnetSubnetAppGatewayPrefix]"
                         }
                     }
                 ]
