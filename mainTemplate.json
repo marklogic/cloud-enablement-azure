@@ -140,7 +140,7 @@
             },
             "minLength": 1,
             "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v9.0-8.2",
-            "defaultValueForMarketPlace": "[replace(deployment().properties.templateLink.uri,'/mainTemplate.json','')]"
+            "defaultValueForMarketPlace": "[deployment().properties.templateLink.uri]"
         },
         "Location": {
             "type": "string",
@@ -152,8 +152,9 @@
     },
     "variables": {
         "templateVersion": "9.0-8.2",
-        "templateBaseUrl": "[concat(parameters('_artifactsLocation'),'/nestedtemplates/')]",
-        "scriptBaseUrl": "[concat(parameters('_artifactsLocation'),'/scripts/')]",
+        "baseUrl": "[replace(parameters('_artifactsLocation'),'/mainTemplate.json','')]",
+        "templateBaseUrl": "[concat(variables('baseUrl'),'/nestedtemplates/')]",
+        "scriptBaseUrl": "[concat(variables('baseUrl'),'/scripts/')]",
         "clusterPrefix": "[replace(parameters('DeploymentName'),' ','')]",
         "clusterLocation": "[parameters('Location')]",
         "enableAvailabilitySet": true,
