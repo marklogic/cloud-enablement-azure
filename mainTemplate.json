@@ -139,8 +139,7 @@
                 "description": "The base URL for dependent assets"
             },
             "minLength": 1,
-            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v9.0-8.2",
-            "defaultValueForMarketPlace": "[deployment().properties.templateLink.uri]"
+            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v9.0-8.2"
         },
         "Location": {
             "type": "string",
