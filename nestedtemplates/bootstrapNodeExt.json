@@ -13,7 +13,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[variables('bootstrapNodeExt')]",
-      "apiVersion": "[parameters('extSetting').apiVersion]",
+      "apiVersion": "2019-03-01",
       "location": "[parameters('extSetting').location]",
       "properties": {
         "publisher": "Microsoft.Azure.Extensions",

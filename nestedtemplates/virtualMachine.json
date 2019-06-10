@@ -13,7 +13,7 @@
   },
   "resources": [
     {
-      "apiVersion": "[parameters('vmSetting').computeApiVersion]",
+      "apiVersion": "2019-03-01",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(parameters('vmSetting').vmName,'-',copyIndex())]",
       "location": "[parameters('vmSetting').location]",

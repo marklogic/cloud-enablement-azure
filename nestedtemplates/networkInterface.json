@@ -14,7 +14,7 @@
         {
             "name": "[concat(parameters('networkInterfaceSetting').name,'-',copyIndex())]",
             "type": "Microsoft.Network/networkInterfaces",
-            "apiVersion": "[parameters('networkInterfaceSetting').apiVersion]",
+            "apiVersion": "2018-11-01",
             "location": "[parameters('networkInterfaceSetting').location]",
             "copy": {
                 "name": "networkInterfaceLoop",
