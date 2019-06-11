@@ -161,13 +161,6 @@
         "license": "[if(and(equals(parameters('Licensee'),'none'),equals(parameters('LicenseKey'),'none')),'DEV','BYOL')]",
         "imageOffer": "[if(equals(variables('license'),'DEV'),'marklogic-developer-9','marklogic-9-byol')]",
         "imageSku": "[if(equals(variables('license'),'DEV'),'ml909_centos','ml909_centos_byol')]",
-        "apiVersions": {
-            "resourcesApiVersion": "2018-05-01",
-            "networkApiVersion": "2017-08-01",
-            "storageApiVersion": "2017-03-30",
-            "computeApiVersion": "2017-03-30",
-            "appGatewayApiVersion": "2018-04-01"
-        },
         "templateUrls": {
             "availabilitySetTemplateUrl": "[concat(variables('templateBaseUrl'),'availabilitySet.json')]",
             "vnetTemplateUrl": "[concat(variables('templateBaseUrl'),'virtualNetwork.json')]",
@@ -201,8 +194,7 @@
             "name": "[concat(variables('clusterPrefix'),'-availset')]",
             "location": "[variables('clusterLocation')]",
             "updateDomainCount": "20",
-            "faultDomainCount": "[if(contains(variables('threeFaultDomainsRegions'),variables('clusterLocation')),'3','2')]",
-            "apiVersion": "[variables('apiVersions').computeApiVersion]"
+            "faultDomainCount": "[if(contains(variables('threeFaultDomainsRegions'),variables('clusterLocation')),'3','2')]"
         },
         "vnetSetting": {
             "name": "[concat(variables('clusterPrefix'),'-',parameters('VnetName'))]",
@@ -211,13 +203,11 @@
             "vnetSubnetName": "[concat(variables('clusterPrefix'),'-',parameters('SubnetName'),'-Vm')]",
             "vnetAppGatewaySubnetName": "[concat(variables('clusterPrefix'),'-',parameters('SubnetName'),'-appGateway')]",
             "vnetVmSubnetPrefix": "[parameters('VmSubnetPrefix')]",
-            "vnetSubnetAppGatewayPrefix": "[parameters('AppGatewaySubnetPrefix')]",
-            "apiVersion": "[variables('apiVersions').networkApiVersion]"
+            "vnetSubnetAppGatewayPrefix": "[parameters('AppGatewaySubnetPrefix')]"
         },
         "nsgSetting": {
             "name": "[concat(variables('clusterPrefix'),'-nsg')]",
-            "location": "[variables('clusterLocation')]",
-            "apiVersion": "[variables('apiVersions').networkApiVersion]"
+            "location": "[variables('clusterLocation')]"
         },
         "nodePublicIpSetting": {
             "namev4": "[concat(variables('clusterPrefix'),'-ipv4-node')]",
@@ -225,12 +215,10 @@
             "domainNameLabel": "[concat(variables('clusterPrefix'),'-',uniqueString(concat(variables('clusterPrefix'),resourceGroup().id)),'-')]",
             "IPv4AllocationMethod": "Static",
             "idleTimeout": "4",
-            "count": "[parameters('NumberOfNodes')]",
-            "apiVersion": "[variables('apiVersions').networkApiVersion]"
+            "count": "[parameters('NumberOfNodes')]"
         },
         "networkInterfaceSetting": {
             "name": "[concat(variables('clusterPrefix'),'-networkInterface')]",
-            "apiVersion": "[variables('apiVersions').networkApiVersion]",
             "location": "[variables('clusterLocation')]",
             "count":  "[parameters('NumberOfNodes')]",
             "vnetName": "[variables('vnetSetting').name]",
@@ -242,7 +230,6 @@
         },
         "appGatewaySetting": {
             "name": "[concat(variables('clusterPrefix'),'-appGateway')]",
-            "apiVersion": "[variables('apiVersions').appGatewayApiVersion]",
             "location": "[variables('clusterLocation')]",
             "appGatewayIpConfigName": "[concat(variables('clusterPrefix'),'-appGatewayIpConfig')]",
             "appGatewayBackendPoolName": "[concat(variables('clusterPrefix'),'-appGatewayBackendPool')]",
@@ -252,7 +239,6 @@
         },
         "publicAppGatewayIpSetting": {
             "name": "[concat(variables('appGatewaySetting').name,'Ip')]",
-            "apiVersion": "[variables('apiVersions').networkApiVersion]",
             "location": "[variables('clusterLocation')]",
             "IPAllocationMethod": "Static",
             "domainNameLabel": "[concat(variables('clusterPrefix'),'-',uniqueString(concat(variables('clusterPrefix'),resourceGroup().id)),'-appgateway')]"
@@ -262,15 +248,12 @@
             "count": "[parameters('NumberOfNodes')]",
 
             "diagnoStorageAcctName": "[concat(toLower(variables('clusterPrefix')),'diagnostorageacct')]",
-            "storageApiVersion": "[variables('apiVersions').storageApiVersion]",
             "diagnoStorageAccType": "Standard_RAGRS",
 
             "dataDiskName": "[concat(variables('clusterPrefix'),'-disk')]",
             "dataDiskCreateOption": "Empty",
             "dataDiskAcctType": "[if(equals(parameters('DataStorage'),'standard'),'Standard_LRS','Premium_LRS')]",
             "dataDiskSizeGB": 1023,
-
-            "computeApiVersion": "[variables('apiVersions').computeApiVersion]",
             "vmName": "[concat(variables('clusterPrefix'),'-vm')]",
             "imagePublisher": "marklogic",
             "imageOffer": "[variables('imageOffer')]",
@@ -293,7 +276,6 @@
         },
         "bootstrapNodeExtSetting": {
             "vmName": "[variables('vmSetting').vmName]",
-            "apiVersion": "[variables('apiVersions').computeApiVersion]",
             "location": "[variables('clusterLocation')]",
             "bootstrapNodeScriptUrl": "[variables('scriptUrls').bootstrapNodeScriptUrl]",
             "initScriptUrl": "[variables('scriptUrls').initScriptUrl]",
@@ -302,7 +284,6 @@
         },
         "additionalNodeExtSetting": {
             "vmName": "[variables('vmSetting').vmName]",
-            "apiVersion": "[variables('apiVersions').computeApiVersion]",
             "location": "[variables('clusterLocation')]",
             "additionalNodeExtCount": "[sub(parameters('NumberOfNodes'),1)]",
             "additionalNodeScriptUrl": "[variables('scriptUrls').additionalNodeScriptUrl]",
@@ -316,7 +297,7 @@
     },
     "resources": [
         {
-            "apiVersion": "2018-02-01",
+            "apiVersion": "2018-05-01",
             "name": "pid-87c9b4df-5580-5c64-a7b4-07bcee297a36",
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -332,7 +313,7 @@
             "name": "availabilitySetDeployment",
             "condition": "[variables('enableAvailabilitySet')]",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "[variables('apiVersions').resourcesAPIVersion]",
+            "apiVersion": "2018-05-01",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -349,7 +330,7 @@
         {
             "name": "vnetDeployment",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "[variables('apiVersions').resourcesAPIVersion]",
+            "apiVersion": "2018-05-01",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -366,7 +347,7 @@
         {
             "name": "nodePublicIpDeployment",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "[variables('apiVersions').resourcesAPIVersion]",
+            "apiVersion": "2018-05-01",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -383,7 +364,7 @@
         {
             "name": "nsgDeployment",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "[variables('apiVersions').resourcesAPIVersion]",
+            "apiVersion": "2018-05-01",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -400,7 +381,7 @@
         {
             "name": "appGatewayDeployment",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "[variables('apiVersions').resourcesAPIVersion]",
+            "apiVersion": "2018-05-01",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -420,7 +401,7 @@
         {
             "name": "networkInterfaceDeployment",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "[variables('apiVersions').resourcesAPIVersion]",
+            "apiVersion": "2018-05-01",
             "dependsOn": [
                 "vnetDeployment",
                 "nodePublicIpDeployment",
@@ -443,7 +424,7 @@
         {
             "name": "virtualMachineDeployment",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "[variables('apiVersions').resourcesAPIVersion]",
+            "apiVersion": "2018-05-01",
             "dependsOn": [
                 "networkInterfaceDeployment",
                 "availabilitySetDeployment"
@@ -464,7 +445,7 @@
         {
             "name": "bootstrapNodeExtDeployment",
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "[variables('apiVersions').resourcesAPIVersion]",
+            "apiVersion": "2018-05-01",
             "dependsOn": [
                 "virtualMachineDeployment"
             ],
@@ -485,7 +466,7 @@
             "name": "additionalNodeExtDeployment",
             "type": "Microsoft.Resources/deployments",
             "condition": "[greater(parameters('NumberOfNodes'),1)]",
-            "apiVersion": "[variables('apiVersions').resourcesAPIVersion]",
+            "apiVersion": "2018-05-01",
             "dependsOn": [
                 "bootstrapNodeExtDeployment"
             ],

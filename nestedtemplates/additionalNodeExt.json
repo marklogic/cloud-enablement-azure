@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('extSetting').vmName,'-',copyIndex(1),'/additional-node-config')]",
-      "apiVersion": "[parameters('extSetting').apiVersion]",
+      "apiVersion": "2019-03-01",
       "location": "[parameters('extSetting').location]",
       "copy": {
         "name": "additionalNodeExtLoop",
