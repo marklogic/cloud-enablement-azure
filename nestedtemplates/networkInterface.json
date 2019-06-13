@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "9.0-8.2",
+    "contentVersion": "9.0-9",
     "parameters": {
         "networkInterfaceSetting": {
             "type": "object"
@@ -14,7 +14,7 @@
         {
             "name": "[concat(parameters('networkInterfaceSetting').name,'-',copyIndex())]",
             "type": "Microsoft.Network/networkInterfaces",
-            "apiVersion": "[parameters('networkInterfaceSetting').apiVersion]",
+            "apiVersion": "2018-11-01",
             "location": "[parameters('networkInterfaceSetting').location]",
             "copy": {
                 "name": "networkInterfaceLoop",

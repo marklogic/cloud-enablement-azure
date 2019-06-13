@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "9.0-8.2",
+  "contentVersion": "9.0-9",
   "parameters": {
     "extSetting": {
       "type": "object"
@@ -10,7 +10,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('extSetting').vmName,'-',copyIndex(1),'/additional-node-config')]",
-      "apiVersion": "[parameters('extSetting').apiVersion]",
+      "apiVersion": "2019-03-01",
       "location": "[parameters('extSetting').location]",
       "copy": {
         "name": "additionalNodeExtLoop",
@@ -30,7 +30,7 @@
           ]
         },
         "protectedSettings": {
-          "commandToExecute": "[concat(parameters('extSetting').cmdPrefix,' ',reference(resourceId('Microsoft.Network/publicIpAddresses/',concat(parameters('extSetting').nodePublicIpName,'0')), '2017-11-01').dnsSettings.fqdn,' ',reference(resourceId('Microsoft.Network/publicIpAddresses/',concat(parameters('extSetting').nodePublicIpName,copyIndex(1))), '2017-11-01').dnsSettings.fqdn)]"
+          "commandToExecute": "[concat(parameters('extSetting').cmdPrefix,' ',reference(resourceId('Microsoft.Network/publicIpAddresses/',concat(parameters('extSetting').nodePublicIpName,'0')), '2018-11-01').dnsSettings.fqdn,' ',reference(resourceId('Microsoft.Network/publicIpAddresses/',concat(parameters('extSetting').nodePublicIpName,copyIndex(1))), '2018-11-01').dnsSettings.fqdn)]"
         }
       }
     }
