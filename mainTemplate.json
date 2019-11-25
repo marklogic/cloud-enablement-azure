@@ -141,6 +141,13 @@
             "minLength": 1,
             "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v9.0-10.2"
         },
+        "_artifactsLocationSasToken": {
+            "type": "securestring",
+            "metadata": {
+                "description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated. Use the defaultValue if the staging location is not secured."
+            },
+            "defaultValue": ""
+        },
         "Location": {
             "type": "string",
             "minLength": 1,
@@ -162,22 +169,22 @@
         "imageOffer": "[if(equals(variables('license'),'DEV'),'marklogic-developer-9','marklogic-9-byol')]",
         "imageSku": "[if(equals(variables('license'),'DEV'),'ml901002_centos','ml901002_centos_byol')]",
         "templateUrls": {
-            "availabilitySetTemplateUrl": "[concat(variables('templateBaseUrl'),'availabilitySet.json')]",
-            "vnetTemplateUrl": "[concat(variables('templateBaseUrl'),'virtualNetwork.json')]",
-            "nodePublicIpTemplateUrl": "[concat(variables('templateBaseUrl'),'nodePublicIp.json')]",
-            "nsgTemplateUrl": "[concat(variables('templateBaseUrl'),'networkSecurityGroup.json')]",
-            "networkInterfaceTemplateUrl": "[concat(variables('templateBaseUrl'),'networkInterface.json')]",
-            "vmTemplateUrl": "[concat(variables('templateBaseUrl'),'virtualMachine.json')]",
-            "bootstrapNodeExtTemplateUrl": "[concat(variables('templateBaseUrl'),'bootstrapNodeExt.json')]",
-            "additionalNodeExtTemplateUrl": "[concat(variables('templateBaseUrl'),'additionalNodeExt.json')]",
-            "appGatewayTemplateUrl": "[concat(variables('templateBaseUrl'),'appGateway.json')]"
+            "availabilitySetTemplateUrl": "[concat(variables('templateBaseUrl'),'availabilitySet.json',parameters('_artifactsLocationSasToken'))]",
+            "vnetTemplateUrl": "[concat(variables('templateBaseUrl'),'virtualNetwork.json',parameters('_artifactsLocationSasToken'))]",
+            "nodePublicIpTemplateUrl": "[concat(variables('templateBaseUrl'),'nodePublicIp.json',parameters('_artifactsLocationSasToken'))]",
+            "nsgTemplateUrl": "[concat(variables('templateBaseUrl'),'networkSecurityGroup.json',parameters('_artifactsLocationSasToken'))]",
+            "networkInterfaceTemplateUrl": "[concat(variables('templateBaseUrl'),'networkInterface.json',parameters('_artifactsLocationSasToken'))]",
+            "vmTemplateUrl": "[concat(variables('templateBaseUrl'),'virtualMachine.json',parameters('_artifactsLocationSasToken'))]",
+            "bootstrapNodeExtTemplateUrl": "[concat(variables('templateBaseUrl'),'bootstrapNodeExt.json',parameters('_artifactsLocationSasToken'))]",
+            "additionalNodeExtTemplateUrl": "[concat(variables('templateBaseUrl'),'additionalNodeExt.json',parameters('_artifactsLocationSasToken'))]",
+            "appGatewayTemplateUrl": "[concat(variables('templateBaseUrl'),'appGateway.json',parameters('_artifactsLocationSasToken'))]"
         },
         "scriptUrls": {
-            "bootstrapNodeScriptUrl": "[concat(variables('scriptBaseUrl'),'config-bootstrap-node.sh')]",
-            "additionalNodeScriptUrl": "[concat(variables('scriptBaseUrl'),'config-additional-node.sh')]",
-            "highAvailabilityScriptUrl": "[concat(variables('scriptBaseUrl'),'high-availability.sh')]",
-            "haExtXqyUrl": "[concat(variables('scriptBaseUrl'),'configure-ha.txt')]",
-            "initScriptUrl": "[concat(variables('scriptBaseUrl'),'init.sh')]"
+            "bootstrapNodeScriptUrl": "[concat(variables('scriptBaseUrl'),'config-bootstrap-node.sh',parameters('_artifactsLocationSasToken'))]",
+            "additionalNodeScriptUrl": "[concat(variables('scriptBaseUrl'),'config-additional-node.sh',parameters('_artifactsLocationSasToken'))]",
+            "highAvailabilityScriptUrl": "[concat(variables('scriptBaseUrl'),'high-availability.sh',parameters('_artifactsLocationSasToken'))]",
+            "haExtXqyUrl": "[concat(variables('scriptBaseUrl'),'configure-ha.txt',parameters('_artifactsLocationSasToken'))]",
+            "initScriptUrl": "[concat(variables('scriptBaseUrl'),'init.sh',parameters('_artifactsLocationSasToken'))]"
         },
         "threeFaultDomainsRegions": [
             "centralus",

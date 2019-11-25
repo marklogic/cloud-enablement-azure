@@ -12,7 +12,6 @@
             "type": "Microsoft.Network/virtualNetworks",
             "location": "[parameters('vnetSetting').location]",
             "apiVersion": "2018-11-01",
-            "dependsOn": [],
             "tags": {
                 "displayName": "[parameters('vnetSetting').name]"
             },

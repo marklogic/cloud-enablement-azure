@@ -12,7 +12,6 @@
             "type": "Microsoft.Compute/availabilitySets",
             "location": "[parameters('availabilitySetSetting').location]",
             "apiVersion": "2019-03-01",
-            "dependsOn": [],
             "tags": {
                 "displayName": "[parameters('availabilitySetSetting').name]"
             },
