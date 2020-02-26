@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "10.0-2.1",
+    "contentVersion": "10.0-3",
     "parameters": {
         "availabilitySetSetting": {
             "type": "object"
