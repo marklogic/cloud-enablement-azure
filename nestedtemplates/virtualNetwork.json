@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "9.0-9",
+    "contentVersion": "9.0-12",
     "parameters": {
         "vnetSetting": {
             "type": "object"
@@ -11,8 +11,7 @@
             "name": "[parameters('vnetSetting').name]",
             "type": "Microsoft.Network/virtualNetworks",
             "location": "[parameters('vnetSetting').location]",
-            "apiVersion": "2018-11-01",
-            "dependsOn": [],
+            "apiVersion": "2020-04-01",
             "tags": {
                 "displayName": "[parameters('vnetSetting').name]"
             },

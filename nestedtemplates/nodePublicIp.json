@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "9.0-9",
+    "contentVersion": "9.0-12",
     "parameters": {
         "nodePublicIpSetting": {
             "type": "object"
@@ -8,7 +8,7 @@
     },
     "resources": [
         {
-            "apiVersion": "2018-11-01",
+            "apiVersion": "2020-04-01",
             "type": "Microsoft.Network/publicIPAddresses",
             "name": "[concat(parameters('nodePublicIpSetting').namev4,copyIndex())]",
             "location": "[parameters('nodePublicIpSetting').location]",
