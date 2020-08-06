@@ -21,7 +21,8 @@ BOOTSTRAP_HOST=$7
 #   (2) POST /admin/v1/instance-admin?admin-user=X&admin-password=Y&realm=Z
 # GET /admin/v1/timestamp is used to confirm restarts.
 ######################################################################################################
-
+INFO "Sleeping for 1 minute to ensure node availability"
+sleep 60
 INFO "Initializing $BOOTSTRAP_HOST"
 $CURL -X POST -d "" http://${BOOTSTRAP_HOST}:8001/admin/v1/init &>> $LOG
 sleep 10
