@@ -165,7 +165,6 @@
         "clusterLocation": "[parameters('Location')]",
         "enableAvailabilitySet": true,
         "enableHA": "[if(lessOrEquals(parameters('NumberOfNodes'),1),bool('false'),equals(parameters('HighAvailability'),'enable'))]",
-        "license": "DEV",
         "imageOffer": "marklogic-developer-9",
         "imageSku": "ml90131-centos",
         "templateUrls": {
