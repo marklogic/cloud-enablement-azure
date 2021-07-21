@@ -14,7 +14,6 @@
                     "regex": "^[a-z0-9A-Z]{1,10}$",
                     "validationMessage": "Only alphanumeric characters are allowed, and the value must be 1-10 characters long."
                 },
-                "options": {},
                 "visible": true
             },
             {
@@ -58,7 +57,6 @@
                             "regex": "^[a-zA-Z0-9._@-]{1,}$",
                             "validationMessage": "Invalid MarkLogic administrator user name."
                         },
-                        "options": {},
                         "visible": true
                     },
                     {
@@ -68,11 +66,11 @@
                             "password": "Admin Password",
                             "confirmPassword": "Confirm admin password"
                         },
-                        "toolTip": "The MarkLogic administrator password. The Password must be 12-40 characters long and contain at least one uppercase letter, digit and special character .!@#$%^&()-_=+",
+                        "toolTip": "The MarkLogic administrator password. The Password must be 12-40 characters long and contain at least one uppercase letter, one lowercase letter, one digit and one special character .!@#$%^&()-_=+",
                         "constraints": {
                             "required": true,
                             "regex": "^(?=.*[A-Z])(?=.*[.!@#$%^&()\\-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
-                            "validationMessage": ""
+                            "validationMessage": "The Password must be 12-40 characters long and contain at least one uppercase letter, one lowercase letter, one digit and one special character .!@#$%^&()-_=+"
                         },
                         "options": {
                             "hideConfirmation": false
@@ -261,8 +259,6 @@
                                     "sshPublicKey": "SSH public key"
                                 },
                                 "toolTip": {
-                                    "authenticationType": "",
-                                    "password": "",
                                     "sshPublicKey": "Public SSH key for virtual machine user specified"
                                 },
                                 "constraints": {
