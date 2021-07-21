@@ -66,11 +66,11 @@
                             "password": "Admin Password",
                             "confirmPassword": "Confirm admin password"
                         },
-                        "toolTip": "The MarkLogic administrator password. The Password must be 12-40 characters long and contain at least one uppercase letter, digit and special character .!@#$%^&()-_=+",
+                        "toolTip": "The MarkLogic administrator password. The Password must be 12-40 characters long and contain at least one uppercase letter, lowercase letter, digit and special character .!@#$%^&()-_=+",
                         "constraints": {
                             "required": true,
                             "regex": "^(?=.*[A-Z])(?=.*[.!@#$%^&()\\-_=+])(?=.*[0-9])(?=.*[a-z]).{12,40}$",
-                            "validationMessage": "The Password must be 12-40 characters long and contain at least one uppercase letter, digit and special character .!@#$%^&()-_=+"
+                            "validationMessage": "The Password must be 12-40 characters long and contain at least one uppercase letter, lowercase letter, digit and special character .!@#$%^&()-_=+"
                         },
                         "options": {
                             "hideConfirmation": false
