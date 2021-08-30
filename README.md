@@ -6,10 +6,10 @@ For deploying MarkLogic on AWS, please visit [cloud-enablement-aws](https://gith
 
 ## Getting Started
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmarklogic%2Fcloud-enablement-azure%2Fmaster%2FmainTemplate.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmarklogic%2Fcloud-enablement-azure%2F9.0-master%2FmainTemplate.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
-<a href="http://armviz.io/#/?load=https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/master/mainTemplate.json" target="_blank">
+<a href="http://armviz.io/#/?load=https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/9.0-master/mainTemplate.json" target="_blank">
   <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
