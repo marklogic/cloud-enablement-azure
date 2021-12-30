@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "9.0-13.1",
+    "contentVersion": "9.0-13.7",
     "parameters": {
         "DeploymentName": {
             "type": "string",
@@ -139,7 +139,7 @@
                 "description": "The base URL for dependent assets"
             },
             "minLength": 1,
-            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v9.0-13.1"
+            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v9.0-13.7"
         },
         "_artifactsLocationSasToken": {
             "type": "securestring",
@@ -157,7 +157,7 @@
         }
     },
     "variables": {
-        "templateVersion": "9.0-13.1",
+        "templateVersion": "9.0-13.7",
         "baseUrl": "[replace(parameters('_artifactsLocation'),'/mainTemplate.json','')]",
         "templateBaseUrl": "[concat(variables('baseUrl'),'/nestedtemplates/')]",
         "scriptBaseUrl": "[concat(variables('baseUrl'),'/scripts/')]",
@@ -166,7 +166,7 @@
         "enableAvailabilitySet": true,
         "enableHA": "[if(lessOrEquals(parameters('NumberOfNodes'),1),bool('false'),equals(parameters('HighAvailability'),'enable'))]",
         "imageOffer": "marklogic-developer-9",
-        "imageSku": "ml90131-centos",
+        "imageSku": "ml90137-centos",
         "templateUrls": {
             "availabilitySetTemplateUrl": "[concat(variables('templateBaseUrl'),'availabilitySet.json',parameters('_artifactsLocationSasToken'))]",
             "vnetTemplateUrl": "[concat(variables('templateBaseUrl'),'virtualNetwork.json',parameters('_artifactsLocationSasToken'))]",
@@ -304,7 +304,7 @@
     "resources": [
         {
             "apiVersion": "2019-10-01",
-            "name": "pid-87c9b4df-5580-5c64-a7b4-07bcee297a36",
+            "name": "pid-79cbf697-d00f-44cc-aeef-33736334712e-partnercenter",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
