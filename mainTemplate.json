@@ -166,7 +166,7 @@
         "enableAvailabilitySet": true,
         "enableHA": "[if(lessOrEquals(parameters('NumberOfNodes'),1),bool('false'),equals(parameters('HighAvailability'),'enable'))]",
         "imageOffer": "marklogic-developer-10",
-        "imageSku": "ml1009_centos",
+        "imageSku": "ml1009_centos8",
         "templateUrls": {
             "availabilitySetTemplateUrl": "[concat(variables('templateBaseUrl'),'availabilitySet.json',parameters('_artifactsLocationSasToken'))]",
             "vnetTemplateUrl": "[concat(variables('templateBaseUrl'),'virtualNetwork.json',parameters('_artifactsLocationSasToken'))]",
