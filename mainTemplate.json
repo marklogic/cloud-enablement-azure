@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "10.0-9.2",
+    "contentVersion": "11.0.0",
     "parameters": {
         "DeploymentName": {
             "type": "string",
@@ -139,7 +139,7 @@
                 "description": "The base URL for dependent assets"
             },
             "minLength": 1,
-            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v10.0-9.2"
+            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v11.0.0"
         },
         "_artifactsLocationSasToken": {
             "type": "securestring",
@@ -157,7 +157,7 @@
         }
     },
     "variables": {
-        "templateVersion": "10.0-9.2",
+        "templateVersion": "11.0.0",
         "baseUrl": "[replace(parameters('_artifactsLocation'),'/mainTemplate.json','')]",
         "templateBaseUrl": "[concat(variables('baseUrl'),'/nestedtemplates/')]",
         "scriptBaseUrl": "[concat(variables('baseUrl'),'/scripts/')]",
@@ -165,8 +165,8 @@
         "clusterLocation": "[parameters('Location')]",
         "enableAvailabilitySet": true,
         "enableHA": "[if(lessOrEquals(parameters('NumberOfNodes'),1),bool('false'),equals(parameters('HighAvailability'),'enable'))]",
-        "imageOffer": "marklogic-developer-10",
-        "imageSku": "ml10092_centos",
+        "imageOffer": "marklogic-developer-11",
+        "imageSku": "ml1100_centos",
         "templateUrls": {
             "availabilitySetTemplateUrl": "[concat(variables('templateBaseUrl'),'availabilitySet.json',parameters('_artifactsLocationSasToken'))]",
             "vnetTemplateUrl": "[concat(variables('templateBaseUrl'),'virtualNetwork.json',parameters('_artifactsLocationSasToken'))]",
@@ -304,7 +304,7 @@
     "resources": [
         {
             "apiVersion": "2019-10-01",
-            "name": "pid-481788b8-7590-4e7c-9541-6d5f74d8b6a7-partnercenter",
+            "name": "pid-11c5e688-d7ea-40cc-b442-6b048956a22b-partnercenter",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
