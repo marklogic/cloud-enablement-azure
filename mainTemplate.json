@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "10.0-9.2",
+    "contentVersion": "10.0-9.5",
     "parameters": {
         "DeploymentName": {
             "type": "string",
@@ -139,7 +139,7 @@
                 "description": "The base URL for dependent assets"
             },
             "minLength": 1,
-            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v10.0-9.2"
+            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v10.0-9.5"
         },
         "_artifactsLocationSasToken": {
             "type": "securestring",
@@ -157,7 +157,7 @@
         }
     },
     "variables": {
-        "templateVersion": "10.0-9.2",
+        "templateVersion": "10.0-9.5",
         "baseUrl": "[replace(parameters('_artifactsLocation'),'/mainTemplate.json','')]",
         "templateBaseUrl": "[concat(variables('baseUrl'),'/nestedtemplates/')]",
         "scriptBaseUrl": "[concat(variables('baseUrl'),'/scripts/')]",
