@@ -16,6 +16,8 @@ source ./init.sh $1 "$2" $3 $4 $5
 ENABLE_HA=$6
 BOOTSTRAP_HOST=$7
 JOINING_HOST=$8
+N_RETRY=10
+RETRY_INTERVAL=10
 
 #####################################################################################################
 #
@@ -43,6 +45,22 @@ INFO "Retrieving the joining host's configuration"
 JOINER_CONFIG=`$CURL -X GET -H "Accept: application/xml" \
     http://${JOINING_HOST}:8001/admin/v1/server-config |& tee -a $LOG`
 echo $JOINER_CONFIG | grep -q "^<host"
+ne=$?
+for i in `seq 1 ${N_RETRY}`; do
+   if [ "$?" -ne 0 ]; then
+      WARN "Unable to to fetch server config for $JOINING_HOST. Retry in $RETRY_INTERVAL seconds"
+      sleep $RETRY_INTERVAL
+      JOINER_CONFIG=`$CURL -X GET -H "Accept: application/xml" \
+         http://${JOINING_HOST}:8001/admin/v1/server-config |& tee -a $LOG`
+      INFO "Printing Joining server config"
+      echo $JOINER_CONFIG
+      echo $JOINER_CONFIG | grep -q "^<host"
+      ne=$?
+   else
+      INFO "Server config fetched"
+      break
+   fi
+done
 if [ "$?" -ne 0 ]; then
   ERROR "Failed to fetch server config for $JOINING_HOST"
   exit 1
