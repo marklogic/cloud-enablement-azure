@@ -32,6 +32,21 @@ TIMESTAMP=`$CURL -X POST -d "" \
    |& tee -a $LOG \
    | grep "last-startup" \
    | sed 's%^.*<last-startup.*>\(.*\)</last-startup>.*$%\1%'`
+for i in `seq 1 ${N_RETRY}`; do
+   if [ "$TIMESTAMP" == "" ]; then
+      WARN "Unable to initialize $JOINING_HOST "
+      sleep $RETRY_INTERVAL
+      TIMESTAMP=`$CURL -X POST -d "" \
+         http://${JOINING_HOST}:8001/admin/v1/init \
+         |& tee -a $LOG \
+         | grep "last-startup" \
+         | sed 's%^.*<last-startup.*>\(.*\)</last-startup>.*$%\1%'` 
+   else
+      INFO "Initialized joining host $JOINING_HOST"
+      break
+   fi
+done
+
 if [ "$TIMESTAMP" == "" ]; then
   ERROR "Failed to initialize $JOINING_HOST"
   exit 1
@@ -78,12 +93,29 @@ $AUTH_CURL --user $USER:"$PASS" -X POST -o cluster-config.zip -d "group=Default"
       --data-urlencode "server-config=${JOINER_CONFIG}" \
       -H "Content-type: application/x-www-form-urlencoded" \
       http://${BOOTSTRAP_HOST}:8001/admin/v1/cluster-config |& tee -a $LOG
+ne=$?
+for i in `seq 1 ${N_RETRY}`; do
+   if [ "$?" -ne 0 ]; then
+      WARN "Unable to to fetch cluster config from $BOOTSTRAP_HOST. Retry in $RETRY_INTERVAL seconds"
+      sleep $RETRY_INTERVAL
+      $AUTH_CURL --user $USER:"$PASS" -X POST -o cluster-config.zip -d "group=Default" \
+            --data-urlencode "server-config=${JOINER_CONFIG}" \
+            -H "Content-type: application/x-www-form-urlencoded" \
+            http://${BOOTSTRAP_HOST}:8001/admin/v1/cluster-config |& tee -a $LOG
+      ne=$?
+   else
+      INFO "Cluster config fetched"
+      break
+   fi
+done
 if [ "$?" -ne 0 ]; then
   ERROR "Failed to fetch cluster config from $BOOTSTRAP_HOST"
   exit 1
 fi
+
 if [ `file cluster-config.zip | grep -cvi "zip archive data"` -eq 1 ]; then
   ERROR "Failed to fetch cluster config from $BOOTSTRAP_HOST"
+  ERROR "Failed to archive response data"
   exit 1
 fi
 
@@ -101,6 +133,27 @@ TIMESTAMP=`$CURL -X POST -H "Content-type: application/zip" \
     |& tee -a $LOG \
     | grep "last-startup" \
     | sed 's%^.*<last-startup.*>\(.*\)</last-startup>.*$%\1%'`
+for i in `seq 1 ${N_RETRY}`; do
+   if [ "$TIMESTAMP" == "" ]; then
+      INFO "Unable to send the cluster config data to the joining host"
+      sleep $RETRY_INTERVAL
+      TIMESTAMP=`$CURL -X POST -H "Content-type: application/zip" \
+               --data-binary @./cluster-config.zip \
+               http://${JOINING_HOST}:8001/admin/v1/cluster-config \
+               |& tee -a $LOG \
+               | grep "last-startup" \
+               | sed 's%^.*<last-startup.*>\(.*\)</last-startup>.*$%\1%'`
+   else
+      INFO "Cluster config data Sent"
+      break
+   fi
+done
+
+if [ "$TIMESTAMP" == "" ]; then
+  ERROR "Failed to send the cluster config data to the joining host"
+  exit 1
+fi
+
 INFO "Checking server restart"
 restart_check $JOINING_HOST $TIMESTAMP $LINENO
 rm ./cluster-config.zip
