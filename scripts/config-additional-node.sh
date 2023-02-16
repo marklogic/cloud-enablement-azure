@@ -62,7 +62,7 @@ JOINER_CONFIG=`$CURL -X GET -H "Accept: application/xml" \
 echo $JOINER_CONFIG | grep -q "^<host"
 ne=$?
 for i in `seq 1 ${N_RETRY}`; do
-   if [ "$?" -ne 0 ]; then
+   if [ "$ne" -ne 0 ]; then
       WARN "Unable to to fetch server config for $JOINING_HOST. Retry in $RETRY_INTERVAL seconds"
       sleep $RETRY_INTERVAL
       JOINER_CONFIG=`$CURL -X GET -H "Accept: application/xml" \
@@ -76,7 +76,7 @@ for i in `seq 1 ${N_RETRY}`; do
       break
    fi
 done
-if [ "$?" -ne 0 ]; then
+if [ "$ne" -ne 0 ]; then
   ERROR "Failed to fetch server config for $JOINING_HOST"
   exit 1
 fi
@@ -95,7 +95,7 @@ $AUTH_CURL --user $USER:"$PASS" -X POST -o cluster-config.zip -d "group=Default"
       http://${BOOTSTRAP_HOST}:8001/admin/v1/cluster-config |& tee -a $LOG
 ne=$?
 for i in `seq 1 ${N_RETRY}`; do
-   if [ "$?" -ne 0 ]; then
+   if [ "$ne" -ne 0 ]; then
       WARN "Unable to to fetch cluster config from $BOOTSTRAP_HOST. Retry in $RETRY_INTERVAL seconds"
       sleep $RETRY_INTERVAL
       $AUTH_CURL --user $USER:"$PASS" -X POST -o cluster-config.zip -d "group=Default" \
@@ -108,7 +108,7 @@ for i in `seq 1 ${N_RETRY}`; do
       break
    fi
 done
-if [ "$?" -ne 0 ]; then
+if [ "$ne" -ne 0 ]; then
   ERROR "Failed to fetch cluster config from $BOOTSTRAP_HOST"
   exit 1
 fi
