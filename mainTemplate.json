@@ -139,7 +139,7 @@
                 "description": "The base URL for dependent assets"
             },
             "minLength": 1,
-            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/v11.0.2"
+            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/11.0.2"
         },
         "_artifactsLocationSasToken": {
             "type": "securestring",
