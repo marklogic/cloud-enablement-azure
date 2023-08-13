@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "10.0-10",
+    "contentVersion": "10.0-7.4",
     "parameters": {
         "DeploymentName": {
             "type": "string",
@@ -139,7 +139,7 @@
                 "description": "The base URL for dependent assets"
             },
             "minLength": 1,
-            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/10.0-10"
+            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/10.0-7.4"
         },
         "_artifactsLocationSasToken": {
             "type": "securestring",
@@ -157,7 +157,7 @@
         }
     },
     "variables": {
-        "templateVersion": "10.0-10",
+        "templateVersion": "10.0-7.4",
         "baseUrl": "[replace(parameters('_artifactsLocation'),'/mainTemplate.json','')]",
         "templateBaseUrl": "[concat(variables('baseUrl'),'/nestedtemplates/')]",
         "scriptBaseUrl": "[concat(variables('baseUrl'),'/scripts/')]",
@@ -166,7 +166,7 @@
         "enableAvailabilitySet": true,
         "enableHA": "[if(lessOrEquals(parameters('NumberOfNodes'),1),bool('false'),equals(parameters('HighAvailability'),'enable'))]",
         "imageOffer": "marklogic-developer-10",
-        "imageSku": "ml10010-centos",
+        "imageSku": "ml10074-centos",
         "templateUrls": {
             "availabilitySetTemplateUrl": "[concat(variables('templateBaseUrl'),'availabilitySet.json',parameters('_artifactsLocationSasToken'))]",
             "vnetTemplateUrl": "[concat(variables('templateBaseUrl'),'virtualNetwork.json',parameters('_artifactsLocationSasToken'))]",
