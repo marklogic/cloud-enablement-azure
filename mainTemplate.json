@@ -165,13 +165,6 @@
             "metadata": {
                 "description": "The type of the image to use for the VM."
             }
-        },
-        "imageSku": {
-          "type": "string",
-          "defaultValue": "[if(equals(parameters('ImageType'), 'RockyLinux8'), 'ml1130_rockylinux8', 'ml1130_rockylinux9')]",
-          "metadata": {
-            "description": "The SKU of the image to use for the VM."
-          }
         }
     },
     "variables": {
@@ -184,7 +177,7 @@
         "enableAvailabilitySet": true,
         "enableHA": "[if(lessOrEquals(parameters('NumberOfNodes'),1),bool('false'),equals(parameters('HighAvailability'),'enable'))]",
         "imageOffer": "marklogic-developer-11",
-        "imageSku": "[parameters('imageSku')]",
+        "imageSku": "[if(equals(parameters('ImageType'), 'RockyLinux8'), 'ml1130_rockylinux8', 'ml1120_centos')]",
         "templateUrls": {
             "availabilitySetTemplateUrl": "[concat(variables('templateBaseUrl'),'availabilitySet.json',parameters('_artifactsLocationSasToken'))]",
             "vnetTemplateUrl": "[concat(variables('templateBaseUrl'),'virtualNetwork.json',parameters('_artifactsLocationSasToken'))]",
