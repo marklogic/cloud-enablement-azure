@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "11.3.0",
+    "contentVersion": "11.3.1",
     "parameters": {
         "DeploymentName": {
             "type": "string",
@@ -8,6 +8,25 @@
             "maxLength": 10,
             "metadata": {
                 "description": "The value will be used as prefix for all resources. Limit to 10 characters and spaces will be removed."
+            }
+        },
+        "ImageType": {
+            "type": "string",
+            "allowedValues": [
+                "RockyLinux8",
+                "RockyLinux9"
+            ],
+            "defaultValue": "RockyLinux8",
+            "metadata": {
+                "description": "The type of image to use for the VM."
+            }
+        },
+        "NumberOfNodes": {
+            "type": "int",
+            "defaultValue": 3,
+            "allowedValues": [1,3],
+            "metadata": {
+                "description": "Number of nodes in the cluster"
             }
         },
         "AdminUser": {
@@ -38,14 +57,6 @@
             "defaultValue": "none",
             "metadata": {
                 "description": "The MarkLogic License Key or 'none' for developer license"
-            }
-        },
-        "NumberOfNodes": {
-            "type": "int",
-            "defaultValue": 3,
-            "allowedValues": [1,3],
-            "metadata": {
-                "description": "Number of nodes in the cluster"
             }
         },
         "VnetName": {
@@ -139,7 +150,7 @@
                 "description": "The base URL for dependent assets"
             },
             "minLength": 1,
-            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/11.3.0"
+            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/11.3.1"
         },
         "_artifactsLocationSasToken": {
             "type": "securestring",
@@ -152,12 +163,12 @@
             "type": "string",
             "minLength": 1,
             "metadata": {
-                "description": "The location to deploy the cluster"
+                "description": "The location to deploy the cluster. (e.g. eastus)"
             }
         }
     },
     "variables": {
-        "templateVersion": "11.3.0",
+        "templateVersion": "11.3.1",
         "baseUrl": "[replace(parameters('_artifactsLocation'),'/mainTemplate.json','')]",
         "templateBaseUrl": "[concat(variables('baseUrl'),'/nestedtemplates/')]",
         "scriptBaseUrl": "[concat(variables('baseUrl'),'/scripts/')]",
@@ -166,7 +177,7 @@
         "enableAvailabilitySet": true,
         "enableHA": "[if(lessOrEquals(parameters('NumberOfNodes'),1),bool('false'),equals(parameters('HighAvailability'),'enable'))]",
         "imageOffer": "marklogic-developer-11",
-        "imageSku": "ml1130_rockylinux8",
+        "imageSku": "[if(equals(parameters('ImageType'), 'RockyLinux8'), 'ml1131_rockylinux8', 'ml1131_rockylinux9')]",
         "templateUrls": {
             "availabilitySetTemplateUrl": "[concat(variables('templateBaseUrl'),'availabilitySet.json',parameters('_artifactsLocationSasToken'))]",
             "vnetTemplateUrl": "[concat(variables('templateBaseUrl'),'virtualNetwork.json',parameters('_artifactsLocationSasToken'))]",

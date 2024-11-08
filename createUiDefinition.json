@@ -17,6 +17,26 @@
                 "visible": true
             },
             {
+                "name": "ImageType",
+                "type": "Microsoft.Common.DropDown",
+                "label": "Image Type",
+                "defaultValue": "Rocky Linux 8",
+                "toolTip": "The type of image to use for the VM.",
+                "constraints": {
+                    "allowedValues": [
+                        {
+                            "label": "Rocky Linux 8",
+                            "value": "RockyLinux8"
+                        },
+                        {
+                            "label": "Rocky Linux 9",
+                            "value": "RockyLinux9"
+                        }
+                    ]
+                },
+                "visible": true
+            },
+            {
                 "name": "numberofNodes",
                 "type": "Microsoft.Common.OptionsGroup",
                 "label": "Number of Nodes",
@@ -780,7 +800,8 @@
             "SSHPublicKey": "[steps('resourceConfig').virtualMachine.vmCredential.sshPublicKey]",
             "InstanceType": "[coalesce(steps('resourceConfig').instanceTypePremium,steps('resourceConfig').instanceTypeStandard)]",
             "HighAvailability": "[steps('marklogic').highAvailability]",
-            "Location": "[location()]"
+            "Location": "[location()]",
+            "ImageType": "[basics('ImageType')]"
         }
     }
 }
