@@ -315,7 +315,7 @@
     "resources": [
         {
             "apiVersion": "2019-10-01",
-            "name": "pid-11c5e688-d7ea-40cc-b442-6b048956a22b-partnercenter",
+            "name": "pid-0a89dd1f-07e9-4f88-95e2-13707e35591f-partnercenter",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
