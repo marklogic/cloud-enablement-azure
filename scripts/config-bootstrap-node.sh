@@ -20,7 +20,7 @@ RETRY_INTERVAL=10
 # Bring up the first host in the cluster. The following
 # requests are sent to the target host:
 #   (1) POST /admin/v1/init
-#   (2) POST /admin/v1/instance-admin?admin-user=X&admin-password=Y&realm=Z
+#   (2) POST /admin/v1/instance-admin?admin-user=<USER>&admin-password=<PASSWORD>
 # GET /admin/v1/timestamp is used to confirm restarts.
 ######################################################################################################
 INFO "Sleeping for 1 minute to ensure node availability"
