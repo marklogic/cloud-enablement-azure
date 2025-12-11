@@ -23,7 +23,7 @@ RETRY_INTERVAL=10
 #   (2) POST /admin/v1/instance-admin...
 # GET /admin/v1/timestamp is used to confirm restarts.
 # For more details, see: 
-#    https://docs.progress.com/bundle/marklogic-server-script-admin-tasks-10/page/topics/cluster.html
+#    https://docs.progress.com/bundle/marklogic-server-script-admin-tasks-12/page/topics/cluster.html
 ######################################################################################################
 INFO "Sleeping for 1 minute to ensure node availability"
 sleep 60
