@@ -4,8 +4,6 @@ The Solution Template for MarkLogic on Azure helps to deploy clusters on Azure. 
 
 For deploying MarkLogic on AWS, please visit [cloud-enablement-aws](https://github.com/marklogic/cloud-enablement-aws).
 
-**⚠️ A backward incompatibility of significant impact was discovered in 12.0.2. We are working on a patch release to deliver a fix as soon as possible. In the meantime, we recommend that you do not upgrade and wait for the upcoming patch release.**
-
 ## Getting Started
 
  [![Deploy To Azure](doc/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmarklogic%2Fcloud-enablement-azure%2F12.0-master%2FmainTemplate.json)
