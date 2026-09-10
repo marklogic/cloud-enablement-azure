@@ -6,12 +6,12 @@ For deploying MarkLogic on AWS, please visit [cloud-enablement-aws](https://gith
 
 ## Getting Started
 
- [![Deploy To Azure](doc/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmarklogic%2Fcloud-enablement-azure%2F12.0-master%2FmainTemplate.json)
+ [![Deploy To Azure](doc/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmarklogic%2Fcloud-enablement-azure%2F12.1-master%2FmainTemplate.json)
 
 * To deploy from Azure Web Portal, navigate to [Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace/apps?search=marklogic&page=1)
 * To deploy from this repository, click the `Deploy to Azure` button under the title  
 * To deploy using Azure CLI (or other tools), refer to the Microsoft Azure [article](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-cli)
-* To see the visualization of deployment structures, click Azure [here](http://armviz.io/#/?load=https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/12.0-master/mainTemplate.json).
+* To see the visualization of deployment structures, click Azure [here](http://armviz.io/#/?load=https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/12.1-master/mainTemplate.json).
 
 ## Reference Architecture
 
