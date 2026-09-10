@@ -1,6 +1,6 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "11.3.6",
+    "contentVersion": "11.3.7",
     "parameters": {
         "DeploymentName": {
             "type": "string",
@@ -150,7 +150,7 @@
                 "description": "The base URL for dependent assets"
             },
             "minLength": 1,
-            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/11.3.6"
+            "defaultValue": "https://raw.githubusercontent.com/marklogic/cloud-enablement-azure/11.3.7"
         },
         "_artifactsLocationSasToken": {
             "type": "securestring",
@@ -168,7 +168,7 @@
         }
     },
     "variables": {
-        "templateVersion": "11.3.6",
+        "templateVersion": "11.3.7",
         "baseUrl": "[replace(parameters('_artifactsLocation'),'/mainTemplate.json','')]",
         "templateBaseUrl": "[concat(variables('baseUrl'),'/nestedtemplates/')]",
         "scriptBaseUrl": "[concat(variables('baseUrl'),'/scripts/')]",
@@ -177,7 +177,7 @@
         "enableAvailabilitySet": true,
         "enableHA": "[if(lessOrEquals(parameters('NumberOfNodes'),1),bool('false'),equals(parameters('HighAvailability'),'enable'))]",
         "imageOffer": "marklogic-developer-11",
-        "imageSku": "[if(equals(parameters('ImageType'), 'RockyLinux8'), 'ml1136_rockylinux8', 'ml1136_rockylinux9')]",
+        "imageSku": "[if(equals(parameters('ImageType'), 'RockyLinux8'), 'ml1137_rockylinux8', 'ml1137_rockylinux9')]",
         "templateUrls": {
             "availabilitySetTemplateUrl": "[concat(variables('templateBaseUrl'),'availabilitySet.json',parameters('_artifactsLocationSasToken'))]",
             "vnetTemplateUrl": "[concat(variables('templateBaseUrl'),'virtualNetwork.json',parameters('_artifactsLocationSasToken'))]",
